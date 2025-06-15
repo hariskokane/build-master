@@ -21,22 +21,22 @@ A modern, modular web application built using **React**, **TypeScript**, **Tailw
 ## 📂 Folder Structure
 
 project/
-├── public/ # Static assets
-├── src/
-│ ├── components/
-│ │ ├── consultants/ # Consultant-related components
-│ │ └── savings/ # Savings features
-│ ├── types/ # TypeScript type definitions
-│ ├── App.tsx # Root component
-│ ├── main.tsx # Entry point
-│ └── index.css # Global styles with Tailwind
-├── index.html # App shell
-├── vite.config.ts # Vite configuration
-├── tailwind.config.js # Tailwind configuration
-├── tsconfig.json # TypeScript config
-├── package.json # Project dependencies & scripts
-└── .gitignore # Files ignored by Git
-
+├── public/ # Static assets 
+├── src/ 
+│ ├── components/ 
+│ │ ├── consultants/ # Consultant-related components 
+│ │ └── savings/ # Savings features 
+│ ├── types/ # TypeScript type definitions 
+│ ├── App.tsx # Root component 
+│ ├── main.tsx # Entry point 
+│ └── index.css # Global styles with Tailwind 
+├── index.html # App shell 
+├── vite.config.ts # Vite configuration 
+├── tailwind.config.js # Tailwind configuration 
+├── tsconfig.json # TypeScript config 
+├── package.json # Project dependencies & scripts 
+└── .gitignore # Files ignored by Git 
+ 
 
 ## 🧑‍💻 Getting Started
 
