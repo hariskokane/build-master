@@ -48,5 +48,7 @@ project/
 ### Installation
 
 git clone https://github.com/your-username/project.git
+
 cd project
+
 npm install
