@@ -96,9 +96,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
       {/* Hero Section with Financial Background */}
-      <div className="relative bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 rounded-3xl p-8 text-white overflow-hidden">
+      <div className="relative bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 rounded-2xl lg:rounded-3xl p-6 lg:p-8 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-32 translate-x-32"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full translate-y-24 -translate-x-24"></div>
@@ -113,14 +113,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
           </div>
         </div>
 
-        <div className="relative z-10 flex items-center justify-between">
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Transaction Manager</h1>
-            <p className="text-emerald-100 text-lg">Track every penny, build your wealth</p>
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2">Transaction Manager</h1>
+            <p className="text-emerald-100 text-base lg:text-lg">Track every penny, build your wealth</p>
           </div>
           <button
             onClick={() => setIsFormOpen(true)}
-            className="bg-white bg-opacity-20 backdrop-blur-sm text-white px-6 py-3 rounded-xl hover:bg-opacity-30 transition-all duration-200 flex items-center gap-2 border border-white border-opacity-20"
+            className="bg-white bg-opacity-20 backdrop-blur-sm text-white px-4 lg:px-6 py-2 lg:py-3 rounded-xl hover:bg-opacity-30 transition-all duration-200 flex items-center gap-2 border border-white border-opacity-20 text-sm lg:text-base"
           >
             <Plus className="w-5 h-5" />
             Add Transaction
@@ -129,15 +129,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4">
-        <div className="flex flex-wrap items-center gap-4">
+      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 lg:p-6">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4">
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-gray-500" />
             <span className="text-sm font-medium text-gray-700">Filter:</span>
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value as 'all' | 'income' | 'expense')}
-              className="border border-gray-300 rounded-xl px-3 py-1 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50"
+              className="border border-gray-300 rounded-xl px-3 py-1 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50 min-w-0"
             >
               <option value="all">All Transactions</option>
               <option value="income">Income Only</option>
@@ -150,14 +150,14 @@ export const TransactionList: React.FC<TransactionListProps> = ({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'date' | 'amount')}
-              className="border border-gray-300 rounded-xl px-3 py-1 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50"
+              className="border border-gray-300 rounded-xl px-3 py-1 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50 min-w-0"
             >
               <option value="date">Date</option>
               <option value="amount">Amount</option>
             </select>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
@@ -175,9 +175,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100">
         <div className="divide-y divide-gray-200">
           {filteredTransactions.map((transaction) => (
-            <div key={transaction.id} className="p-4 hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+            <div key={transaction.id} className="p-4 lg:p-6 hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3 lg:gap-4 flex-1 min-w-0">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
                     transaction.type === 'income' 
                       ? 'bg-gradient-to-br from-emerald-50 to-green-100 text-emerald-600' 
@@ -190,9 +190,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                     )}
                   </div>
                   
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <h3 className="font-medium text-gray-800">{transaction.description}</h3>
-                    <div className="flex items-center gap-3 text-sm text-gray-500 mt-1">
+                    <div className="flex flex-wrap items-center gap-2 lg:gap-3 text-sm text-gray-500 mt-1">
                       <span className="bg-gradient-to-r from-gray-100 to-slate-100 px-2 py-1 rounded-lg text-xs">
                         {transaction.category}
                       </span>
@@ -206,7 +206,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between sm:justify-end gap-4 sm:flex-shrink-0">
                   <span className={`text-lg font-semibold ${
                     transaction.type === 'income' 
                       ? 'bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent' 
@@ -237,18 +237,18 @@ export const TransactionList: React.FC<TransactionListProps> = ({
         </div>
         
         {filteredTransactions.length === 0 && (
-          <div className="p-12 text-center">
+          <div className="p-8 lg:p-12 text-center">
             {/* Beautiful Empty State with Background */}
             <div className="relative">
               <div className="w-32 h-32 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-200 to-teal-200 opacity-50"></div>
                 <Plus className="w-16 h-16 text-emerald-600 relative z-10" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">No transactions found</h3>
-              <p className="text-gray-500 mb-6">Start tracking your finances by adding your first transaction</p>
+              <h3 className="text-lg lg:text-xl font-semibold text-gray-800 mb-2">No transactions found</h3>
+              <p className="text-gray-500 mb-6 text-sm lg:text-base">Start tracking your finances by adding your first transaction</p>
               <button
                 onClick={() => setIsFormOpen(true)}
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 font-medium shadow-lg"
+                className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 font-medium shadow-lg text-sm lg:text-base"
               >
                 Add your first transaction
               </button>

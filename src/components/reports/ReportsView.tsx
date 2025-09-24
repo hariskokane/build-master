@@ -186,9 +186,9 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
   const colors = ['#8B5CF6', '#06B6D4', '#F59E0B', '#EF4444', '#10B981', '#EC4899', '#F97316', '#84CC16'];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
       {/* Hero Section with Analytics Theme */}
-      <div className="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-8 text-white overflow-hidden">
+      <div className="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-2xl lg:rounded-3xl p-6 lg:p-8 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-32 translate-x-32"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full translate-y-24 -translate-x-24"></div>
@@ -208,17 +208,17 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
 
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Financial Analytics</h1>
-            <p className="text-purple-100 text-lg">Comprehensive insights into your financial patterns and trends</p>
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2">Financial Analytics</h1>
+            <p className="text-purple-100 text-base lg:text-lg">Comprehensive insights into your financial patterns and trends</p>
           </div>
           
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4">
             <div className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-purple-100" />
               <select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                className="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-xl px-3 py-1 text-sm text-white placeholder-purple-200 focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                className="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-xl px-3 py-1 text-sm text-white placeholder-purple-200 focus:ring-2 focus:ring-white focus:ring-opacity-50 min-w-0"
               >
                 {availableYears.map(year => (
                   <option key={year} value={year} className="text-gray-800">{year}</option>
@@ -231,7 +231,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
               <select
                 value={viewType}
                 onChange={(e) => setViewType(e.target.value as 'monthly' | 'yearly' | 'category')}
-                className="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-xl px-3 py-1 text-sm text-white placeholder-purple-200 focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                className="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-xl px-3 py-1 text-sm text-white placeholder-purple-200 focus:ring-2 focus:ring-white focus:ring-opacity-50 min-w-0"
               >
                 <option value="monthly" className="text-gray-800">Monthly View</option>
                 <option value="yearly" className="text-gray-800">Yearly Comparison</option>
@@ -243,7 +243,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
       </div>
 
       {/* Key Metrics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-emerald-100 to-green-100 rounded-full -translate-y-10 translate-x-10 opacity-50"></div>
           <div className="flex items-center gap-3 mb-3 relative z-10">
@@ -303,7 +303,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
           {/* Monthly Income vs Expenses */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Monthly Breakdown - {selectedYear}</h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -323,7 +323,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
           {/* Quarterly Summary */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Quarterly Performance - {selectedYear}</h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={quarterlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -342,7 +342,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
           {/* Savings Trend */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Savings Trend - {selectedYear}</h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -370,7 +370,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
           {/* Yearly Comparison */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Year-over-Year Comparison</h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={yearlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -389,7 +389,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
           </div>
 
           {/* Yearly Growth Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {yearlyData.map((yearData, index) => {
               const prevYear = yearlyData[index + 1];
               const incomeGrowth = prevYear ? ((yearData.income - prevYear.income) / prevYear.income) * 100 : 0;
@@ -439,10 +439,10 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
       {viewType === 'category' && (
         <>
           {/* Category Spending Pie Chart */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Expense Distribution - {selectedYear}</h3>
-              <div className="h-80">
+              <div className="h-64 sm:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -471,7 +471,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
             {/* Category Breakdown Table */}
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
               <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Category Breakdown</h3>
-              <div className="space-y-3 max-h-80 overflow-y-auto">
+              <div className="space-y-3 max-h-64 sm:max-h-80 overflow-y-auto">
                 {categoryData.map((category, index) => {
                   const percentage = (category.amount / categoryData.reduce((sum, c) => sum + c.amount, 0)) * 100;
                   return (
@@ -497,7 +497,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
           {/* Category Spending Bar Chart */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
             <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">Category Spending Comparison</h3>
-            <div className="h-80">
+            <div className="h-64 sm:h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={categoryData} layout="horizontal">
                   <CartesianGrid strokeDasharray="3 3" />
@@ -517,7 +517,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions }) => {
       {/* Expense Trend Analysis */}
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
         <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">12-Month Expense Trend</h3>
-        <div className="h-80">
+        <div className="h-64 sm:h-80">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={expenseTrendData}>
               <CartesianGrid strokeDasharray="3 3" />

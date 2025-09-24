@@ -90,17 +90,17 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onLogin, onSignup }) => {
         </div>
       </div>
 
-      <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 w-full max-w-md max-h-[90vh] overflow-y-auto border border-white/20 relative z-10">
+      <div className="bg-white/95 backdrop-blur-sm rounded-2xl lg:rounded-3xl shadow-2xl p-6 lg:p-8 w-full max-w-md max-h-[90vh] overflow-y-auto border border-white/20 relative z-10">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
               <PiggyBank className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
+          <h1 className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
             {isLogin ? 'Welcome back!' : 'Create your account'}
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm lg:text-base">
             {isLogin 
               ? 'Sign in to your Budget Master account' 
               : 'Join Budget Master and take control of your finances'
@@ -241,7 +241,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onLogin, onSignup }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg"
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg text-sm lg:text-base"
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -255,11 +255,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onLogin, onSignup }) => {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm lg:text-base">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-medium hover:from-purple-700 hover:to-pink-700"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-medium hover:from-purple-700 hover:to-pink-700 text-sm lg:text-base"
             >
               {isLogin ? 'Sign up' : 'Sign in'}
             </button>

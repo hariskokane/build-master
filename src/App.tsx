@@ -17,6 +17,7 @@ import { Transaction, Budget, SavingsGoal, User, CalendarEvent } from './types';
 function App() {
   const { user, isLoading, login, signup, logout, updateProfile, changePassword } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [savingsGoals, setSavingsGoals] = useState<SavingsGoal[]>([]);
@@ -172,6 +173,9 @@ function App() {
     return changePassword(oldPassword, newPassword);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -232,8 +236,14 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} onLogout={logout} />
-      <div className="ml-64 min-h-screen flex flex-col">
+      <Sidebar 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab} 
+        onLogout={logout}
+        isOpen={isSidebarOpen}
+        onToggle={toggleSidebar}
+      />
+      <div className="lg:ml-64 min-h-screen flex flex-col">
         <Header 
           user={user} 
           notifications={notifications}
@@ -241,6 +251,7 @@ function App() {
           onMarkAllAsRead={markAllAsRead}
           onUpdateProfile={handleUpdateProfile}
           onChangePassword={handleChangePassword}
+          onMenuToggle={toggleSidebar}
         />
         <main className="flex-1 overflow-auto">
           {renderActiveTab()}

@@ -197,15 +197,15 @@ export const ConsultantsList: React.FC = () => {
   const locations = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai'];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
       {/* Hero Section with Background */}
-      <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-3xl p-8 text-white overflow-hidden">
+      <div className="relative bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-2xl lg:rounded-3xl p-6 lg:p-8 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-32 translate-x-32"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full translate-y-24 -translate-x-24"></div>
         <div className="relative z-10">
-          <h1 className="text-3xl font-bold mb-2">Financial Consultants</h1>
-          <p className="text-purple-100 text-lg">Connect with certified financial experts for personalized advice</p>
+          <h1 className="text-2xl lg:text-3xl font-bold mb-2">Financial Consultants</h1>
+          <p className="text-purple-100 text-base lg:text-lg">Connect with certified financial experts for personalized advice</p>
           <div className="mt-6 flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
@@ -231,7 +231,7 @@ export const ConsultantsList: React.FC = () => {
 
       {/* Search and Filters */}
       <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="relative">
             <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -239,7 +239,7 @@ export const ConsultantsList: React.FC = () => {
               placeholder="Search consultants..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             />
           </div>
           
@@ -248,7 +248,7 @@ export const ConsultantsList: React.FC = () => {
             <select
               value={filterSpecialization}
               onChange={(e) => setFilterSpecialization(e.target.value)}
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             >
               <option value="all">All Specializations</option>
               {specializations.map(spec => (
@@ -261,7 +261,7 @@ export const ConsultantsList: React.FC = () => {
             <select
               value={filterLocation}
               onChange={(e) => setFilterLocation(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             >
               <option value="all">All Locations</option>
               {locations.map(location => (
@@ -274,7 +274,7 @@ export const ConsultantsList: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as 'rating' | 'experience' | 'rate')}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             >
               <option value="rating">Sort by Rating</option>
               <option value="experience">Sort by Experience</option>
@@ -285,7 +285,7 @@ export const ConsultantsList: React.FC = () => {
       </div>
 
       {/* Consultants Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
         {filteredConsultants.map((consultant) => (
           <ConsultantCard
             key={consultant.id}
@@ -297,16 +297,16 @@ export const ConsultantsList: React.FC = () => {
       </div>
 
       {filteredConsultants.length === 0 && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 lg:p-8 text-center">
           <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <p className="text-gray-500 mb-4">No consultants found matching your criteria</p>
+          <p className="text-gray-500 mb-4 text-sm lg:text-base">No consultants found matching your criteria</p>
           <button
             onClick={() => {
               setSearchTerm('');
               setFilterSpecialization('all');
               setFilterLocation('all');
             }}
-            className="text-blue-600 hover:text-blue-700 font-medium"
+            className="text-blue-600 hover:text-blue-700 font-medium text-sm lg:text-base"
           >
             Clear all filters
           </button>

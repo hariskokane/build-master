@@ -9,6 +9,8 @@ import {
   Calendar,
   Calculator,
   Users,
+  Menu,
+  X,
   // Add more icon options for logo
   Wallet,
   TrendingUp,
@@ -24,6 +26,8 @@ interface SidebarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
   onLogout: () => void;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
 const menuItems = [
@@ -37,7 +41,7 @@ const menuItems = [
   { id: 'consultants', label: 'Financial Consultants', icon: Users },
 ];
 
-export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout, isOpen, onToggle }) => {
   // You can change the logo icon here - try any of these options:
   const LogoIcon = PiggyBank; // Current logo
   // const LogoIcon = Wallet;     // Alternative 1
@@ -48,10 +52,38 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogo
   // const LogoIcon = Landmark;    // Alternative 6 (Bank building)
   // const LogoIcon = Building2;   // Alternative 7 (Modern building)
 
+  const handleItemClick = (itemId: string) => {
+    onTabChange(itemId);
+    // Close sidebar on mobile after selection
+    if (window.innerWidth < 1024) {
+      onToggle();
+    }
+  };
+
   return (
-    <div className="fixed left-0 top-0 w-64 bg-gradient-to-b from-indigo-900 via-purple-900 to-pink-900 shadow-xl h-screen flex flex-col z-40">
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          onClick={onToggle}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <div className={`fixed left-0 top-0 w-64 bg-gradient-to-b from-indigo-900 via-purple-900 to-pink-900 shadow-xl h-screen flex flex-col z-50 transform transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      } lg:translate-x-0`}>
+        {/* Mobile close button */}
+        <button
+          onClick={onToggle}
+          className="lg:hidden absolute top-4 right-4 text-white hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition-colors"
+        >
+          <X className="w-5 h-5" />
+        </button>
+        
       <div className="p-6 border-b border-purple-700/30">
-        <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+        <h1 className="text-xl lg:text-2xl font-bold text-white flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg flex items-center justify-center">
             <LogoIcon className="w-5 h-5 text-white" />
           </div>
@@ -67,7 +99,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogo
             return (
               <li key={item.id}>
                 <button
-                  onClick={() => onTabChange(item.id)}
+                  onClick={() => handleItemClick(item.id)}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
                     activeTab === item.id
                       ? 'bg-gradient-to-r from-cyan-500 to-purple-500 text-white shadow-lg transform scale-105'
@@ -92,6 +124,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogo
           <span className="text-sm font-medium">Logout</span>
         </button>
       </div>
-    </div>
+      </div>
+    </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bell, Search, User, X, Calendar, AlertTriangle, CheckCircle, Info, DollarSign, ChevronDown } from 'lucide-react';
+import { Bell, Search, User, X, Calendar, AlertTriangle, CheckCircle, Info, DollarSign, ChevronDown, Menu } from 'lucide-react';
 import { User as UserType, Notification } from '../../types';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 import { ProfileModal } from '../profile/ProfileModal';
@@ -11,6 +11,7 @@ interface HeaderProps {
   onMarkAllAsRead: () => void;
   onUpdateProfile: (userData: Partial<UserType>) => void;
   onChangePassword: (oldPassword: string, newPassword: string) => Promise<void>;
+  onMenuToggle: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
@@ -19,7 +20,8 @@ export const Header: React.FC<HeaderProps> = ({
   onMarkAsRead, 
   onMarkAllAsRead,
   onUpdateProfile,
-  onChangePassword
+  onChangePassword,
+  onMenuToggle
 }) => {
   const [isNotificationPanelOpen, setIsNotificationPanelOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
@@ -65,15 +67,24 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+      <header className="bg-white shadow-sm border-b border-gray-200 px-4 lg:px-6 py-4">
         <div className="flex items-center justify-between">
+          {/* Mobile menu button */}
+          <button
+            onClick={onMenuToggle}
+            className="lg:hidden p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-xl transition-colors"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+          
           <div className="flex items-center gap-4">
+            {/* Search - hidden on mobile, shown on larger screens */}
             <div className="relative">
               <Search className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search transactions, budgets..."
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent w-80 bg-gray-50"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent w-48 md:w-64 lg:w-80 bg-gray-50 hidden sm:block"
               />
             </div>
           </div>
@@ -94,12 +105,12 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="relative">
               <button
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                className="flex items-center gap-3 px-3 py-2 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-200"
+                className="flex items-center gap-2 lg:gap-3 px-2 lg:px-3 py-2 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 rounded-xl transition-all duration-200"
               >
                 <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <div className="text-left">
+                <div className="text-left hidden sm:block">
                   <p className="text-sm font-medium text-gray-800">{user.name}</p>
                   <p className="text-xs text-gray-500">{user.email}</p>
                 </div>
@@ -108,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({
 
               {/* Profile Dropdown */}
               {isProfileDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
+                <div className="absolute right-0 top-full mt-2 w-56 sm:w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
                   <div className="px-4 py-3 border-b border-gray-100">
                     <p className="font-medium text-gray-800">{user.name}</p>
                     <p className="text-sm text-gray-500">{user.email}</p>
@@ -156,7 +167,7 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Notification Panel */}
       {isNotificationPanelOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-end z-50">
-          <div className="bg-white w-96 h-full shadow-2xl overflow-hidden">
+          <div className="bg-white w-full sm:w-96 h-full shadow-2xl overflow-hidden">
             {/* Header */}
             <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 text-white">
               <div className="flex items-center justify-between">

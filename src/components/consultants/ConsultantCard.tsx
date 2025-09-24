@@ -45,14 +45,14 @@ export const ConsultantCard: React.FC<ConsultantCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 lg:p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       {/* Header */}
       <div className="flex items-start gap-4 mb-4">
         <div className="relative">
           <img
             src={consultant.image}
             alt={consultant.name}
-            className="w-16 h-16 rounded-2xl object-cover shadow-lg"
+            className="w-12 h-12 lg:w-16 lg:h-16 rounded-2xl object-cover shadow-lg"
             onError={(e) => {
               // Fallback to initials if image fails to load
               const target = e.target as HTMLImageElement;
@@ -62,7 +62,7 @@ export const ConsultantCard: React.FC<ConsultantCardProps> = ({
             }}
           />
           <div 
-            className="w-16 h-16 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg hidden"
+            className="w-12 h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white font-bold text-lg lg:text-xl shadow-lg hidden"
           >
             {consultant.name.split(' ').map(n => n[0]).join('')}
           </div>
@@ -74,7 +74,7 @@ export const ConsultantCard: React.FC<ConsultantCardProps> = ({
         
         <div className="flex-1">
           <div className="flex items-center justify-between mb-1">
-            <h3 className="text-lg font-semibold text-gray-800">{consultant.name}</h3>
+            <h3 className="text-base lg:text-lg font-semibold text-gray-800">{consultant.name}</h3>
             <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getAvailabilityColor(consultant.availability)}`}>
               {consultant.availability}
             </span>
@@ -155,31 +155,33 @@ export const ConsultantCard: React.FC<ConsultantCardProps> = ({
       )}
 
       {/* Action Buttons */}
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <button
           onClick={() => onBookConsultation(consultant.id)}
           disabled={consultant.availability === 'Offline'}
-          className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+          className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg text-sm"
         >
           <Calendar className="w-4 h-4" />
           Book Consultation
         </button>
         
-        <button
-          onClick={() => onContact(consultant.id, 'phone')}
-          className="px-3 py-2 border border-gray-300 text-gray-700 rounded-xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200"
-          title="Call"
-        >
-          <Phone className="w-4 h-4" />
-        </button>
-        
-        <button
-          onClick={() => onContact(consultant.id, 'email')}
-          className="px-3 py-2 border border-gray-300 text-gray-700 rounded-xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200"
-          title="Email"
-        >
-          <Mail className="w-4 h-4" />
-        </button>
+        <div className="flex gap-2 sm:flex-shrink-0">
+          <button
+            onClick={() => onContact(consultant.id, 'phone')}
+            className="px-3 py-2 border border-gray-300 text-gray-700 rounded-xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200"
+            title="Call"
+          >
+            <Phone className="w-4 h-4" />
+          </button>
+          
+          <button
+            onClick={() => onContact(consultant.id, 'email')}
+            className="px-3 py-2 border border-gray-300 text-gray-700 rounded-xl hover:bg-gradient-to-r hover:from-gray-50 hover:to-slate-50 transition-all duration-200"
+            title="Email"
+          >
+            <Mail className="w-4 h-4" />
+          </button>
+        </div>
       </div>
     </div>
   );
