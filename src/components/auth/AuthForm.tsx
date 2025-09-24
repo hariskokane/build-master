@@ -137,19 +137,21 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onLogin, onSignup }) => {
                 />
               </div>
 
-              {/* Fixed Date of Birth Field */}
+              {/* Fixed DOB placeholder field */}
               <div className="relative">
                 <Calendar className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 <input
-                  type="date"
+                  type={formData.dateOfBirth ? 'date' : 'text'}
                   name="dateOfBirth"
+                  placeholder="Date of Birth"
                   value={formData.dateOfBirth}
                   onChange={handleChange}
+                  onFocus={(e) => (e.target.type = 'date')}
+                  onBlur={(e) => { if (!formData.dateOfBirth) e.target.type = 'text' }}
                   required={!isLogin}
                   max={new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0]}
                   className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 bg-gray-50"
                 />
-                <span className="absolute left-12 -top-5 text-gray-500 text-xs">Date of Birth</span>
               </div>
 
               <div className="relative">
